@@ -7,36 +7,6 @@
   },
   {
     "type": "Third-Party",
-    "name": "Tome of Beasts (2023)",
-    "shortname": "ToB23",
-    "link": "https://koboldpress.com/kpstore/product/tome-of-beasts-1-2023-edition/"
-  },
-  {
-    "type": "Third-Party",
-    "name": "Tome of Beasts",
-    "shortname": "ToB",
-    "link": "https://koboldpress.com/kpstore/product/tome-of-beasts-for-5th-edition/"
-  },
-  {
-    "type": "Third-Party",
-    "name": "Tome of Beasts 2",
-    "shortname": "ToB2",
-    "link": "https://koboldpress.com/tome-of-beasts-2/"
-  },
-  {
-    "type": "Third-Party",
-    "name": "Tome of Beasts 3",
-    "shortname": "ToB3",
-    "link": "https://koboldpress.com/tome-of-beasts-3/"
-  },
-  {
-    "type": "Third-Party",
-    "name": "Demon Cults & Secret Societies",
-    "shortname": "DCSS",
-    "link": "https://koboldpress.com/kpstore/product/demon-cults-secret-societies-5e-dnd/"
-  },
-  {
-    "type": "Third-Party",
     "name": "Fifth Edition Foes",
     "shortname": "5eF",
     "link": "https://www.froggodgames.com/product/fifth-edition-foes/"
@@ -71,4 +41,5 @@
     "shortname": "UBRotH",
     "link": "https://nordgamesllc.com/product/ultimate-bestiary-revenge-horde/"
   }
+
 ]

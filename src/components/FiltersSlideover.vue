@@ -187,7 +187,7 @@ defineProps({
                     :options="filters.legendaryOptions"
                   ></Multiselect>
                 </div>
-                <AlignmentGrid></AlignmentGrid>
+                <!--<AlignmentGrid></AlignmentGrid>-->
               </div>
             </div>
           </div>

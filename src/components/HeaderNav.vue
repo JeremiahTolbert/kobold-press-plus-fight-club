@@ -53,17 +53,8 @@ const menu = ref(false);
             class="inline-flex items-center px-1 text-sm font-medium text-emerald-300 hover:text-white hover:border-gray-300"
             >Import Custom Monsters</a
           >
-          <a
-            target="_blank"
-            href="https://ko-fi.com/fantasycomputerworks"
-            class="inline-flex items-center px-1 text-sm font-medium text-emerald-300 hover:text-white hover:border-gray-300"
-            >Donate</a
-          >
-          <RouterLink
-            to="about"
-            class="inline-flex items-center px-1 text-sm font-medium text-emerald-300 hover:text-white hover:border-gray-300 h-full"
-            >About</RouterLink
-          >
+         
+          
           <a
             title="News"
             @click="useNews().show()"

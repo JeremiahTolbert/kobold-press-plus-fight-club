@@ -120,10 +120,10 @@ export const useSources = defineStore("sources", {
 
       const order = [
         "Official",
-        "Official Adventure",
-        "Official Web Supplement",
+        //"Official Adventure",
+        //"Official Web Supplement",
         "Third-Party",
-        "Community",
+        //"Community",
       ];
 
       sources.sort((a, b) => {

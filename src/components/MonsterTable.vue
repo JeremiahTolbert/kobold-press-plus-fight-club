@@ -145,10 +145,10 @@ onBeforeMount(() => {
               class="table-cell w-64"
               @sort="setSortBy($event)"
             />
-            <MonsterTableHeading
+            <!--<MonsterTableHeading
               label="Alignment"
               class="hidden xl:table-cell w-32 text-right pr-4"
-            />
+            />-->
             <MonsterTableHeading
               label="Size"
               sorts-column="size"
