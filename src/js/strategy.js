@@ -461,7 +461,7 @@ class MCDM extends EncounterStrategy {
     };
   }
 
-  static getBudgetSpend(encounter) {
+  static getBudgetSpend(encounter) {  
     return encounter.reduce((acc, group) => {
       let count = group.count;
       if (group.monster.isMinion) {
@@ -603,6 +603,8 @@ class MCDM extends EncounterStrategy {
     );
 
     let encounterTemplate = this.getEncounterTemplate(encounterType);
+
+    console.log(encounterTemplate);
 
     let totalRatioSoFar = 0;
     encounterTemplate.groups = encounterTemplate.groups.map((groupTemplate) => {
@@ -806,7 +808,477 @@ class MCDM extends EncounterStrategy {
   }
 }
 
+class TOV extends EncounterStrategy {
+  static key = "tov";
+  static label = "Kobold Press Tales of the Valiant";
+  static description = `You can read more about this on page 10 of the Monster Vault.`;
+  static url =
+    "https://koboldpress.com/kpstore/product/tovrpg-pg-mv/";
+  static difficulties = [
+    { key: "easy", label: "Easy" },
+    { key: "standard", label: "Challenging" },
+    { key: "hard", label: "Hard" },
+  ];
+  static defaultDifficulty = "standard";
+  static measurementUnit = "CR";
+
+  static tableHeader = "CR Budget";
+
+
+  // Benchmark calculator is actually based on number of players vs a multiplier
+  // 
+  static encounterCrPerCharacter = {
+    1: { easy: 0.125, standard: 0.25, hard: 0.25, cap: 0.5 },
+    2: { easy: 0.125, standard: 0.25, hard: 0.5, cap: 2 },
+    3: { easy: 0.125, standard: 0.25, hard: 0.75, cap: 3 },
+    4: { easy: 0.125, standard: 0.25, hard: 1, cap: 4 },
+    5: { easy: 1, standard: 0.5, hard: 2.5, cap: 7 },
+    6: { easy: 1.5, standard: 0.5, hard: 3, cap: 9 },
+    7: { easy: 2, standard: 0.5, hard: 3.5, cap: 10 },
+    8: { easy: 2.5, standard: 0.5, hard: 4, cap: 12 },
+    9: { easy: 3, standard: 0.5, hard: 4.5, cap: 13 },
+    10: { easy: 3.5, standard: 0.5, hard: 5, cap: 15 },
+    11: { easy: 4, standard: 0.75, hard: 5.5, cap: 16 },
+    12: { easy: 4.5, standard: 0.75, hard: 6, cap: 18 },
+    13: { easy: 5, standard: 0.75, hard: 6.5, cap: 19 },
+    14: { easy: 5.5, standard: 0.75, hard: 7, cap: 21 },
+    15: { easy: 6, standard: 0.75, hard: 7.5, cap: 22 },
+    16: { easy: 6.5, standard: 0.75, hard: 8, cap: 24 },
+    17: { easy: 7, standard: 0.75, hard: 8.5, cap: 25 },
+    18: { easy: 7.5, standard: 0.75, hard: 9, cap: 27 },
+    19: { easy: 8, standard: 0.75, hard: 9.5, cap: 28 },
+    20: { easy: 8.5, standard: 0.75, hard: 10, cap: 30 },
+  };
+
+  // static encounterBudget = {
+  //   1: { 3: 0.5, 4: 0.5, 5: 0.5, 6: 1, 7: 1, min: 0.125, cap: 0.5 },
+  //   2: { 3: 1, 4: 2, 5: 2, 6: 3, 7: 1, min: 0.125, cap: 2 },
+  //   3: { 3: 2, 4: 3, 5: 3, 6: 4, 7: 3, min: 0.125, cap: 3 },
+  //   4: { 3: 3, 4: 4, 5: 5, 6: 6, 7: 5, min: 0.125, cap: 4 },
+  //   5: { 3: 7, 4: 10, 5: 12, 6: 15, 7: 17, min: 0.5, cap: 7 },
+  //   6: { 3: 9, 4: 12, 5: 15, 6: 18, 7: 21, min: 1, cap: 9 },
+  //   7: { 3: 10, 4: 14, 5: 17, 6: 21, 7: 24, min: 1, cap: 10 },
+  //   8: { 3: 12, 4: 16, 5: 20, 6: 24, 7: 28, min: 1, cap: 12 },
+  //   9: { 3: 13, 4: 18, 5: 22, 6: 27, 7: 31, min: 2, cap: 13 },
+  //   10: { 3: 15, 4: 20, 5: 25, 6: 30, 7: 35, min: 2, cap: 15 },
+  //   11: { 3: 24, 4: 33, 5: 41, 6: 49, 7: 57, min: 3, cap: 16 },
+  //   12: { 3: 3, 4: 4, 5: 5, 6: 6, 7: 5, min: 0.125, cap: 18 },
+  //   13: { 3: 3, 4: 4, 5: 5, 6: 6, 7: 5, min: 0.125, cap: 19 },
+  //   14: { 3: 3, 4: 4, 5: 5, 6: 6, 7: 5, min: 0.125, cap: 21 },
+  //   15: { 3: 3, 4: 4, 5: 5, 6: 6, 7: 5, min: 0.125, cap: 22 },
+  //   16: { 3: 3, 4: 4, 5: 5, 6: 6, 7: 5, min: 0.125, cap: 24 },
+  //   17: { 3: 3, 4: 4, 5: 5, 6: 6, 7: 5, min: 0.125, cap: 25 },
+  //   18: { 3: 3, 4: 4, 5: 5, 6: 6, 7: 5, min: 0.125, cap: 27 },
+  //   19: { 3: 3, 4: 4, 5: 5, 6: 6, 7: 5, min: 0.125, cap: 28 },
+  //   20: { 3: 3, 4: 4, 5: 5, 6: 6, 7: 5, min: 0.125, cap: 30 },
+  // };
+
+  static bossEncounterCrModifiers = [
+    { easy: "5-6", standard: "3-4", hard: "0-2" },
+    { easy: "4-5", standard: "2-3", hard: "0-1" },
+  ];
+
+  static getBudget() {
+    let totalPlayers = useParty().totalPlayers;
+    if (!totalPlayers) {
+      return {};
+    }
+
+    let totalLevels =
+      useParty().groups.reduce(
+        (acc, group) => acc + group.level * group.players,
+        0
+      ) +
+      useParty().activePlayers.reduce((acc, player) => acc + player.level, 0);
+
+    let averageLevel = Math.floor(totalLevels / totalPlayers);
+
+    let crBudget = this.encounterCrPerCharacter[averageLevel];
+
+
+    return {
+      "Easy": crBudget.standard * (totalLevels - averageLevel ),
+      "Challenging": crBudget.standard * totalLevels,
+      "Hard": crBudget.standard * ( totalLevels + averageLevel),
+      "One Monster Cap": crBudget.cap
+    };
+  }
+
+  static getBudgetSpend(encounter) {  
+    return encounter.reduce((acc, group) => {
+      let count = group.count;
+      if (group.monster.isMinion) {
+        count = Math.round(Math.max(1, count / group.monster.cr.minionNum));
+      }
+      return acc + group.monster.cr.numeric * count;
+    }, 0);
+  }
+
+  static getSecondaryMeasurements() {
+    const budgetSpend = this.getBudgetSpend(useEncounter().monsterGroups);
+    const encounterDailyPoints = this.getEncounterDailyPoints();
+    return [
+      {
+        label: "CR Spent",
+        rawValue: budgetSpend,
+        value: helpers.formatNumber(budgetSpend),
+      },
+     
+    ].filter((x) => x.rawValue > 0);
+  }
+
+  static getDifficultyFeel() {
+    if (!useParty().totalPlayersToGainXP) {
+      return "";
+    }
+
+    const budgetSpend = this.getBudgetSpend(useEncounter().monsterGroups);
+
+    if (!budgetSpend) return false;
+
+    const levels = Object.entries(this.getBudget());
+    levels.pop();
+
+    for (let i = 1; i < levels.length; i++) {
+      const [lowerKey, lowerValue] = levels[i - 1];
+      const [upperKey, upperValue] = levels[i];
+      const ratio = helpers.ratio(lowerValue, upperValue, budgetSpend);
+      if (lowerValue === upperValue) continue;
+
+      if (upperKey === "Hard" && ratio > 1.0) {
+        if (ratio >= 1.5) {
+          return ratio >= 3.0
+            ? "like " + helpers.randomArrayElement(this.insaneDifficultyStrings)
+            : ratio >= 2.0
+            ? "really deadly"
+            : "deadly";
+        }
+        return upperKey.toLowerCase();
+      } else if (ratio >= 0.0 && ratio <= 1.0) {
+        if (ratio >= 0.6) {
+          return upperKey.toLowerCase();
+        } else if (ratio >= 0.4) {
+          return "slightly " + upperKey.toLowerCase();
+        }
+        return lowerKey.toLowerCase();
+      }
+    }
+
+    const ratio = helpers.ratio(0, levels[0][1], budgetSpend);
+    return ratio > 0.5 ? "like a nuisance" : "like a minor nuisance";
+  }
+
+  static getEncounterDailyPoints() {
+    const budget = this.getBudget();
+
+    if (!budget) {
+      return 0;
+    }
+
+    const budgetSpend = this.getBudgetSpend(useEncounter().monsterGroups);
+
+    if (budgetSpend === 0 || budgetSpend < budget["Easy"]) return 0;
+    if (budgetSpend <= budget["Challenging"]) return 1;
+    if (budgetSpend < budget["Hard"]) return 2;
+
+    const ratio = helpers.ratio(
+      budget["Challenging"],
+      budget["Hard"],
+      budgetSpend
+    );
+
+    if (budgetSpend >= budget["Hard"] && ratio < 2.0) return 4;
+
+    return 8;
+  }
+
+  static getActualDifficulty() {
+    const budget = this.getBudget();
+
+    if (!budget) {
+      return "N/A";
+    }
+
+    const budgetSpend = this.getBudgetSpend(useEncounter().monsterGroups);
+
+    if (budgetSpend === 0) return "None";
+    if (budgetSpend < budget["Easy"]) return "Trivial";
+    if (budgetSpend < budget["Challenging"]) return "Easy";
+    if (budgetSpend < budget["Hard"]) return "Challenging";
+
+    return "Hard";
+  }
+
+  static generateEncounter(difficulty, encounterType, retrying = false) {
+    let crCaps = [];
+    let totalCrBudget = 0;
+    for (const group of useParty().groups) {
+     
+      const groupCrTable = this.encounterCrPerCharacter[group.level];
+     
+      crCaps.push(groupCrTable.cap);
+     
+      if (difficulty == "standard") {
+        totalCrBudget += group.players * group.level * groupCrTable['standard'];
+
+      } else if (difficulty == "easy" ) {
+
+        totalCrBudget += ( group.players - 1 ) * group.level * groupCrTable['standard'];
+        
+      } else {
+
+        totalCrBudget += (group.players + 1 ) * group.level * groupCrTable['standard'];
+
+      }
+
+    }
+    
+
+    for (const character of useParty().activePlayers) {
+      const isLargeGroup = Number(totalPlayers >= 6);
+      const bossEncounterCrModifier =
+        this.bossEncounterCrModifiers[isLargeGroup][difficulty];
+      totalCrBudget =
+        crCap - helpers.randomIntBetween(...bossEncounterCrModifier.split("-"));
+
+    }
+
+
+    let crCap = crCaps.reduce((acc, val) => acc + val, 0) / crCaps.length;
+    const totalPlayers = useParty().totalPlayers;
+
+    // If this is a boss encounter, prioritize solo monsters, and adjust the CR target
+    if (encounterType === CONST.ENCOUNTER_TYPES.boss.key) {
+      const isLargeGroup = Number(totalPlayers >= 6);
+      const bossEncounterCrModifier =
+        this.bossEncounterCrModifiers[isLargeGroup][difficulty];
+      totalCrBudget =
+      crCap - helpers.randomIntBetween(...bossEncounterCrModifier.split("-"));
+        
+    }
+    console.log(totalCrBudget);
+
+    const maxNumberMinions = helpers.randomIntBetween(
+      Math.max(3, totalPlayers - 1) * 3,
+      Math.max(4, totalPlayers + 1) * 3
+    );
+
+    let encounterTemplate = this.getEncounterTemplate(encounterType);
+
+    let totalRatioSoFar = 0;
+    encounterTemplate.groups = encounterTemplate.groups.map((groupTemplate) => {
+      let groupRatio =
+        typeof groupTemplate.ratio === "string"
+          ? helpers.randomFloatBetween(...groupTemplate.ratio.split("-"))
+          : groupTemplate?.ratio;
+      if (!groupRatio) {
+        groupRatio = 1.0 - totalRatioSoFar;
+      }
+      totalRatioSoFar += groupRatio;
+      groupTemplate.ratio = groupRatio;
+      return groupTemplate;
+    });
+
+    encounterTemplate.groups.reverse();
+
+    const newEncounter = [];
+    for (const groupTemplate of encounterTemplate.groups) {
+     
+      let targetCr = encounterTemplate.subtractive
+        ? totalCrBudget / encounterTemplate.groups.length
+        : totalCrBudget * groupTemplate.ratio;
+
+
+
+      targetCr /= groupTemplate.count;
+
+
+      targetCr = Math.min(targetCr, crCap);
+
+
+      const foundMonster = this.getBestMonster(
+        targetCr,
+        newEncounter,
+        groupTemplate,
+        encounterType
+      );
+
+
+
+      if (!foundMonster) {
+        // If we failed to find a monster, perhaps we need to try a different encounter template, hopefully working eventually
+        if (!retrying) {
+          let retriedEncounter = false;
+          let attempts = 0;
+          while (!retriedEncounter && attempts < 10) {
+            attempts++;
+            retriedEncounter = this.generateEncounter(
+              difficulty,
+              encounterType,
+              true
+            );
+            if (retriedEncounter) return retriedEncounter;
+          }
+          useNotifications().notify({
+            title: "Failed to generate encounter!",
+            body: "Change the filters so that there are more monsters to sample from.",
+            icon: "fa-circle-xmark",
+            icon_color: "text-red-400",
+            sticky: true,
+          });
+        }
+        return false;
+      }
+
+      const monster = foundMonster.copy();
+      let count = groupTemplate.count;
+      if (monster.isMinion) {
+        monster.name += " (Minion)";
+        count = Math.min(monster.cr.minionNum * count, maxNumberMinions);
+      }
+      newEncounter.push({ monster, count, baseCount: groupTemplate.count });
+    }
+
+    // If we have any leftover budget, we add a monster to pad it out
+    if (encounterType != 'boss') {
+      let totalGeneratedCr = this.getBudgetSpend(newEncounter);
+      if (totalCrBudget > totalGeneratedCr * 1.1) {
+        let foundMonster;
+        let attempts = 0;
+        while (!foundMonster && attempts < 10) {
+          attempts++;
+          const leftOverCr = totalCrBudget - totalGeneratedCr;
+          const totalMonsters = helpers.randomIntBetween(
+            1,
+            Math.max(1, leftOverCr)
+          );
+          const crPerMonster = leftOverCr / totalMonsters;
+          foundMonster = this.getBestMonster(
+            crPerMonster,
+            newEncounter,
+            { count: totalMonsters },
+            encounterType,
+            (monster) => {
+              return !monster.isMinion;
+            }
+          );
+          if (foundMonster) {
+            const monster = foundMonster.copy();
+            let count = totalMonsters;
+            if (monster.isMinion) {
+              monster.name += " (Minion)";
+              count = Math.min(monster.cr.minionNum * count, maxNumberMinions);
+            }
+            newEncounter.push({ monster, count });
+            break;
+          }
+        }
+      }
+    }
+
+    newEncounter.sort((a, b) => {
+      if (a.monster.unique && !b.monster.unique) {
+        return -1;
+      }
+      if (!a.monster.unique && b.monster.unique) {
+        return 1;
+      }
+      return b.monster.cr.numeric - a.monster.cr.numeric;
+    });
+
+    return newEncounter;
+  }
+
+  static monsterFilter(monster, groupTemplate, encounter, encounterType) {
+    const allowMinions = [
+      CONST.ENCOUNTER_TYPES.boss_minions.key,
+      CONST.ENCOUNTER_TYPES.horde.key,
+      CONST.ENCOUNTER_TYPES.horde.key,
+    ].includes(encounterType);
+
+    return (
+      super.monsterFilter(monster, groupTemplate, encounter, encounterType) &&
+      (allowMinions ? true : !monster.isMinion) &&
+      (encounterType === CONST.ENCOUNTER_TYPES.boss.key ? monster.legendary : true)
+    );
+  }
+
+  static pickRandomMonster(monsterList, groupTemplate, encounterType) {
+    if (
+      encounterType === CONST.ENCOUNTER_TYPES.boss_minions.key &&
+      !groupTemplate?.leader
+    ) {
+      return super.pickRandomMonster(monsterList);
+    }
+    const numMonsters = monsterList.length + 1;
+    const weightedMonsters = monsterList.map((monster, index) => {
+      return {
+        monster,
+        weight: index / numMonsters + (monster.isLeader ? 2 : 1) / numMonsters,
+      };
+    });
+    const randomFloat = Math.random();
+    for (const weightedMonster of weightedMonsters) {
+      if (weightedMonster.weight >= randomFloat) {
+        return weightedMonster.monster;
+      }
+    }
+  }
+
+  static getBestMonster(  
+    targetCr,
+    encounter,
+    groupTemplate,
+    encounterType,
+    additionalFilters
+  ) {
+    let monsterCRIndex;
+    for (let i = 0; i < CONST.CR.LIST.length - 2; i++) {
+      const lowerBound = CONST.CR[CONST.CR.LIST[i]].numeric;
+      const upperBound = CONST.CR[CONST.CR.LIST[i + 1]].numeric;
+      if (upperBound > targetCr) {
+        monsterCRIndex =
+          Math.max(0, targetCr - lowerBound) < upperBound - targetCr
+            ? i
+            : i + 1;
+        break;
+      }
+    }
+
+    if (monsterCRIndex === undefined) return false;
+
+    return this.getMonstersFromCR(
+      monsterCRIndex,
+      encounter,
+      groupTemplate,
+      encounterType,
+      additionalFilters
+    );
+  }
+
+  static getNewMonster(monsterGroup, encounter) {
+    const monsterList = useMonsters().filterBy(
+      useFilters().overriddenCopy({
+        maxCr: monsterGroup.monster.cr.numeric,
+        minCr: monsterGroup.monster.cr.numeric,
+      }),
+      (monster) => {
+        return !encounter.some((group) => group.monster.slug === monster.slug);
+      }
+    );
+    if (!monsterList.length) return;
+    const newMonster = helpers.randomArrayElement(monsterList);
+    if (!newMonster) return;
+    const monster = newMonster.copy();
+    if (monster.isMinion) {
+      monster.name += " (Minion)";
+    }
+    return monster;
+  }
+}
+
 export default {
   [KFC.key]: KFC,
   [MCDM.key]: MCDM,
+  [TOV.key]: TOV,
 };
