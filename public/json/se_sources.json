@@ -1,39 +1,33 @@
 [
   {
-    "type": "Official",
+    "type": "Kobold Press Official",
     "name": "Monster Vault",
     "shortname": "TovMV",
     "link": "https://koboldpress.com/kpstore/product/tovrpg-pg-mv/",
     "default": true
   },
   {
-    "type": "Official",
+    "type": "Kobold Press Official",
     "name": "Tome of Beasts (2023)",
     "shortname": "ToB23",
     "link": "https://koboldpress.com/kpstore/product/tome-of-beasts-1-2023-edition/"
   },
   {
-    "type": "Official",
+    "type": "Kobold Press Official",
     "name": "Tome of Beasts",
     "shortname": "ToB",
     "link": "https://koboldpress.com/kpstore/product/tome-of-beasts-for-5th-edition/"
   },
   {
-    "type": "Official",
+    "type": "Kobold Press Official",
     "name": "Tome of Beasts 2",
     "shortname": "ToB2",
     "link": "https://koboldpress.com/tome-of-beasts-2/"
   },
   {
-    "type": "Official",
+    "type": "Kobold Press Official",
     "name": "Tome of Beasts 3",
     "shortname": "ToB3",
     "link": "https://koboldpress.com/tome-of-beasts-3/"
-  },
-  {
-    "type": "Official",
-    "name": "Demon Cults & Secret Societies",
-    "shortname": "DCSS",
-    "link": "https://koboldpress.com/kpstore/product/demon-cults-secret-societies-5e-dnd/"
   }
 ]

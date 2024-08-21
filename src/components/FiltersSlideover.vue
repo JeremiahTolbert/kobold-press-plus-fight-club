@@ -159,7 +159,7 @@ defineProps({
                   <div
                     class="block font-medium text-gray-700 dark:text-gray-300 mb-1"
                   >
-                    Native Environment
+                    Environment
                   </div>
 
                   <Multiselect

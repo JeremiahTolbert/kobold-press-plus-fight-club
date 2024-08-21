@@ -604,8 +604,6 @@ class MCDM extends EncounterStrategy {
 
     let encounterTemplate = this.getEncounterTemplate(encounterType);
 
-    console.log(encounterTemplate);
-
     let totalRatioSoFar = 0;
     encounterTemplate.groups = encounterTemplate.groups.map((groupTemplate) => {
       let groupRatio =
@@ -826,7 +824,7 @@ class TOV extends EncounterStrategy {
 
 
   // Benchmark calculator is actually based on number of players vs a multiplier
-  // 
+  // Easy and Hard here not used, only standard
   static encounterCrPerCharacter = {
     1: { easy: 0.125, standard: 0.25, hard: 0.25, cap: 0.5 },
     2: { easy: 0.125, standard: 0.25, hard: 0.5, cap: 2 },
@@ -850,29 +848,6 @@ class TOV extends EncounterStrategy {
     20: { easy: 8.5, standard: 0.75, hard: 10, cap: 30 },
   };
 
-  // static encounterBudget = {
-  //   1: { 3: 0.5, 4: 0.5, 5: 0.5, 6: 1, 7: 1, min: 0.125, cap: 0.5 },
-  //   2: { 3: 1, 4: 2, 5: 2, 6: 3, 7: 1, min: 0.125, cap: 2 },
-  //   3: { 3: 2, 4: 3, 5: 3, 6: 4, 7: 3, min: 0.125, cap: 3 },
-  //   4: { 3: 3, 4: 4, 5: 5, 6: 6, 7: 5, min: 0.125, cap: 4 },
-  //   5: { 3: 7, 4: 10, 5: 12, 6: 15, 7: 17, min: 0.5, cap: 7 },
-  //   6: { 3: 9, 4: 12, 5: 15, 6: 18, 7: 21, min: 1, cap: 9 },
-  //   7: { 3: 10, 4: 14, 5: 17, 6: 21, 7: 24, min: 1, cap: 10 },
-  //   8: { 3: 12, 4: 16, 5: 20, 6: 24, 7: 28, min: 1, cap: 12 },
-  //   9: { 3: 13, 4: 18, 5: 22, 6: 27, 7: 31, min: 2, cap: 13 },
-  //   10: { 3: 15, 4: 20, 5: 25, 6: 30, 7: 35, min: 2, cap: 15 },
-  //   11: { 3: 24, 4: 33, 5: 41, 6: 49, 7: 57, min: 3, cap: 16 },
-  //   12: { 3: 3, 4: 4, 5: 5, 6: 6, 7: 5, min: 0.125, cap: 18 },
-  //   13: { 3: 3, 4: 4, 5: 5, 6: 6, 7: 5, min: 0.125, cap: 19 },
-  //   14: { 3: 3, 4: 4, 5: 5, 6: 6, 7: 5, min: 0.125, cap: 21 },
-  //   15: { 3: 3, 4: 4, 5: 5, 6: 6, 7: 5, min: 0.125, cap: 22 },
-  //   16: { 3: 3, 4: 4, 5: 5, 6: 6, 7: 5, min: 0.125, cap: 24 },
-  //   17: { 3: 3, 4: 4, 5: 5, 6: 6, 7: 5, min: 0.125, cap: 25 },
-  //   18: { 3: 3, 4: 4, 5: 5, 6: 6, 7: 5, min: 0.125, cap: 27 },
-  //   19: { 3: 3, 4: 4, 5: 5, 6: 6, 7: 5, min: 0.125, cap: 28 },
-  //   20: { 3: 3, 4: 4, 5: 5, 6: 6, 7: 5, min: 0.125, cap: 30 },
-  // };
-
   static bossEncounterCrModifiers = [
     { easy: "5-6", standard: "3-4", hard: "0-2" },
     { easy: "4-5", standard: "2-3", hard: "0-1" },
@@ -894,7 +869,6 @@ class TOV extends EncounterStrategy {
     let averageLevel = Math.floor(totalLevels / totalPlayers);
 
     let crBudget = this.encounterCrPerCharacter[averageLevel];
-
 
     return {
       "Easy": crBudget.standard * (totalLevels - averageLevel ),
@@ -1012,6 +986,7 @@ class TOV extends EncounterStrategy {
   static generateEncounter(difficulty, encounterType, retrying = false) {
     let crCaps = [];
     let totalCrBudget = 0;
+    let partyLevel = 0;
     for (const group of useParty().groups) {
      
       const groupCrTable = this.encounterCrPerCharacter[group.level];
@@ -1020,43 +995,42 @@ class TOV extends EncounterStrategy {
      
       if (difficulty == "standard") {
         totalCrBudget += group.players * group.level * groupCrTable['standard'];
+        partyLevel = group.level;
 
       } else if (difficulty == "easy" ) {
 
         totalCrBudget += ( group.players - 1 ) * group.level * groupCrTable['standard'];
-        
+        partyLevel = group.level;
       } else {
 
         totalCrBudget += (group.players + 1 ) * group.level * groupCrTable['standard'];
-
+        partyLevel = group.level;
       }
 
     }
     
 
     for (const character of useParty().activePlayers) {
-      const isLargeGroup = Number(totalPlayers >= 6);
-      const bossEncounterCrModifier =
-        this.bossEncounterCrModifiers[isLargeGroup][difficulty];
+      
       totalCrBudget =
-        crCap - helpers.randomIntBetween(...bossEncounterCrModifier.split("-"));
+        crCap;
 
     }
 
 
     let crCap = crCaps.reduce((acc, val) => acc + val, 0) / crCaps.length;
     const totalPlayers = useParty().totalPlayers;
-
+    
     // If this is a boss encounter, prioritize solo monsters, and adjust the CR target
     if (encounterType === CONST.ENCOUNTER_TYPES.boss.key) {
-      const isLargeGroup = Number(totalPlayers >= 6);
-      const bossEncounterCrModifier =
-        this.bossEncounterCrModifiers[isLargeGroup][difficulty];
-      totalCrBudget =
-      crCap - helpers.randomIntBetween(...bossEncounterCrModifier.split("-"));
-        
+      if (partyLevel < 5 ) {
+        totalCrBudget = crCap;
+        crCap = crCap;
+      } else {
+        totalCrBudget = partyLevel + 5;
+        crCap = totalCrBudget;
+      }            
     }
-    console.log(totalCrBudget);
 
     const maxNumberMinions = helpers.randomIntBetween(
       Math.max(3, totalPlayers - 1) * 3,
@@ -1199,7 +1173,7 @@ class TOV extends EncounterStrategy {
     return (
       super.monsterFilter(monster, groupTemplate, encounter, encounterType) &&
       (allowMinions ? true : !monster.isMinion) &&
-      (encounterType === CONST.ENCOUNTER_TYPES.boss.key ? monster.legendary : true)
+      (encounterType === CONST.ENCOUNTER_TYPES.boss.key ) //what should this be?
     );
   }
 
@@ -1278,7 +1252,7 @@ class TOV extends EncounterStrategy {
 }
 
 export default {
+  [TOV.key]: TOV,
   [KFC.key]: KFC,
   [MCDM.key]: MCDM,
-  [TOV.key]: TOV,
 };

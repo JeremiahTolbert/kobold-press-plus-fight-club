@@ -5,9 +5,26 @@ module.exports = {
   content: ["./index.html", "./src/**/*.{vue,js,ts,jsx,tsx}"],
   darkMode: "class",
   theme: {
+    
     extend: {
       fontFamily: {
         sans: ["Inter var", ...defaultTheme.fontFamily.sans],
+      },
+      colors: {
+        primary: '#104c9d',
+        secondary: '#104c9d',
+        kbp: {
+          '50' : '#104c9d',
+          '100': '#104c9d',
+          '200': '#104c9d',
+          '300': '#104c9d',
+          '400': '#104c9d',
+          '500': '#104c9d',
+          '600': '#104c9d',
+          '700': '#104c9d',
+          '800': '#104c9d',
+          '900': '#104c9d',
+        },
       },
       backgroundImage: (theme) => ({
         "multiselect-caret": `none`,

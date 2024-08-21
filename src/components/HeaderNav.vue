@@ -17,7 +17,7 @@ const menu = ref(false);
 </script>
 
 <template>
-  <nav class="bg-emerald-700 shrink-0">
+  <nav class="bg-black shrink-0">
     <div class="mx-auto px-4 sm:px-6 lg:px-6">
       <div class="flex justify-between h-16 w-full">
         <div class="flex">
@@ -37,45 +37,41 @@ const menu = ref(false);
         <div
           class="hidden lg:flex text-white lg:-my-px lg:ml-6 lg:space-x-8 items-center"
         >
+          <RouterLink
+          @click="menu = false"
+          to="about"
+          class="block pl-3 pr-4 py-2 border-l-4 border-transparent text-base font-medium text-white hover:text-white hover:border-gray-300"
+          >About</RouterLink
+        >
           <a
             @click="modals.show('keyboard')"
             href="javascript:"
-            class="inline-flex items-center px-1 text-sm font-medium text-emerald-300 hover:text-white hover:border-gray-300"
+            class="inline-flex items-center px-1 text-sm font-medium text-white hover:text-white hover:border-gray-300"
             >Keyboard Shortcuts
             <span
-              class="inline-flex items-center px-1 py-0.5 rounded text-xs font-medium bg-emerald-800 text-emerald-100 ml-1"
+              class="inline-flex items-center px-1 py-0.5 rounded text-xs font-medium bg-kbp-800 text-white ml-1"
               >Ctrl+/</span
             ></a
           >
           <a
             @click="modals.show('importer')"
             href="javascript:"
-            class="inline-flex items-center px-1 text-sm font-medium text-emerald-300 hover:text-white hover:border-gray-300"
+            class="inline-flex items-center px-1 text-sm font-medium text-white hover:text-white hover:border-gray-300"
             >Import Custom Monsters</a
           >
          
-          
           <a
-            title="News"
-            @click="useNews().show()"
-            href="javascript:"
-            class="inline-flex items-center px-2 py-1 text-sm font-medium text-emerald-300 hover:text-white hover:border-gray-300 relative"
+           
+            href="https://www.koboldpress.com/"
+            class="inline-flex items-center px-1 text-sm font-medium text-white hover:text-white hover:border-gray-300"
+            >Return to Kobold Press</a
           >
-            <i class="fa fa-rss"></i>
-            <span class="absolute flex h-3 w-3 top-0 right-0" v-if="useNews().hasUnread">
-              <span
-                class="animate-ping absolute inline-flex h-full w-full rounded-full bg-amber-300 opacity-75"
-              ></span>
-              <span
-                class="relative inline-flex rounded-full h-3 w-3 bg-amber-300"
-              ></span>
-            </span>
-          </a>
+         
           <a
             title="Toggle light mode (ctrl+shift+\)"
             @click="$emit('update:theme', theme === 'dark' ? 'light' : 'dark')"
             href="javascript:"
-            class="inline-flex items-center px-1 text-sm font-medium text-emerald-300 hover:text-white hover:border-gray-300 h-full"
+            class="inline-flex items-center px-1 text-sm font-medium text-white hover:text-white hover:border-gray-300 h-full"
           >
             <i
               :class="{
@@ -85,6 +81,7 @@ const menu = ref(false);
               class="fa"
             ></i>
           </a>
+           
         </div>
         <div class="-mr-2 flex items-center lg:hidden">
           <button
@@ -142,7 +139,7 @@ const menu = ref(false);
       <div class="pt-2 pb-3 space-y-1">
         <a
           href="https://fantasy-calendar.com/"
-          class="block pl-3 pr-4 py-2 border-l-4 border-transparent text-base font-medium text-emerald-300 hover:text-white hover:border-gray-300"
+          class="block pl-3 pr-4 py-2 border-l-4 border-transparent text-base font-medium text-white hover:text-white hover:border-gray-300"
           >Fantasy Calendar</a
         >
         <a
@@ -153,36 +150,21 @@ const menu = ref(false);
             }
           "
           href="javascript:"
-          class="block pl-3 pr-4 py-2 border-l-4 border-transparent text-base font-medium text-emerald-300 hover:text-white hover:border-gray-300"
+          class="block pl-3 pr-4 py-2 border-l-4 border-transparent text-base font-medium text-white hover:text-white hover:border-gray-300"
           >Import Custom Monsters</a
         >
         <RouterLink
           @click="menu = false"
           to="about"
-          class="block pl-3 pr-4 py-2 border-l-4 border-transparent text-base font-medium text-emerald-300 hover:text-white hover:border-gray-300"
+          class="block pl-3 pr-4 py-2 border-l-4 border-transparent text-base font-medium text-white hover:text-white hover:border-gray-300"
           >About</RouterLink
         >
-        <a
-          title="News"
-          @click="() => {useNews().show(); menu = false;}"
-          href="javascript:"
-          class="block pl-3 pr-4 py-2 border-l-4 border-transparent text-base font-medium text-emerald-300 hover:text-white hover:border-gray-300 relative"
-        >
-          <span class="absolute flex h-3 w-3 top-3.5 left-16" v-if="useNews().hasUnread">
-            <span
-              class="animate-ping absolute inline-flex h-full w-full rounded-full bg-amber-300 opacity-75"
-            ></span>
-            <span
-              class="relative inline-flex rounded-full h-3 w-3 bg-amber-300"
-            ></span>
-          </span>
-          <span>News</span>
-        </a>
+        
         <a
           title="Toggle light mode (ctrl+shift+\)"
           @click="$emit('update:theme', theme === 'dark' ? 'light' : 'dark')"
           href="javascript:"
-          class="block pl-3 pr-4 py-2 border-l-4 border-transparent text-base font-medium text-emerald-300 hover:text-white hover:border-gray-300"
+          class="block pl-3 pr-4 py-2 border-l-4 border-transparent text-base font-medium text-white hover:text-white hover:border-gray-300"
         >
           <i :class="theme === 'light' ? 'fa-moon' : 'fa-sun'" class="fa"></i>
           <span class="ml-1">Toggle theme</span>
