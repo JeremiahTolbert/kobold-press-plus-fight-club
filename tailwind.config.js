@@ -8,7 +8,7 @@ module.exports = {
     
     extend: {
       fontFamily: {
-        sans: ["Inter var", ...defaultTheme.fontFamily.sans],
+        sans: ["'Open Sans'", ...defaultTheme.fontFamily.sans],
       },
       colors: {
         primary: '#104c9d',
@@ -23,7 +23,7 @@ module.exports = {
           '600': '#104c9d',
           '700': '#fff',
           '800': '#163d71',
-          '900': '#ccc',
+          '900': '#a3a3a3',
         },
       },
       backgroundImage: (theme) => ({
