@@ -630,12 +630,15 @@ class MCDM extends EncounterStrategy {
 
       targetCr = Math.min(targetCr, crCap);
 
+
+
       const foundMonster = this.getBestMonster(
         targetCr,
         newEncounter,
         groupTemplate,
         encounterType
       );
+
 
       if (!foundMonster) {
         // If we failed to find a monster, perhaps we need to try a different encounter template, hopefully working eventually
@@ -814,10 +817,10 @@ class TOV extends EncounterStrategy {
     "https://koboldpress.com/kpstore/product/tovrpg-pg-mv/";
   static difficulties = [
     { key: "easy", label: "Easy" },
-    { key: "standard", label: "Challenging" },
+    { key: "challenging", label: "Challenging" },
     { key: "hard", label: "Hard" },
   ];
-  static defaultDifficulty = "standard";
+  static defaultDifficulty = "challenging";
   static measurementUnit = "CR";
 
   static tableHeader = "CR Budget";
@@ -826,31 +829,31 @@ class TOV extends EncounterStrategy {
   // Benchmark calculator is actually based on number of players vs a multiplier
   // Easy and Hard here not used, only standard
   static encounterCrPerCharacter = {
-    1: { easy: 0.125, standard: 0.25, hard: 0.25, cap: 0.5 },
-    2: { easy: 0.125, standard: 0.25, hard: 0.5, cap: 2 },
-    3: { easy: 0.125, standard: 0.25, hard: 0.75, cap: 3 },
-    4: { easy: 0.125, standard: 0.25, hard: 1, cap: 4 },
-    5: { easy: 1, standard: 0.5, hard: 2.5, cap: 7 },
-    6: { easy: 1.5, standard: 0.5, hard: 3, cap: 9 },
-    7: { easy: 2, standard: 0.5, hard: 3.5, cap: 10 },
-    8: { easy: 2.5, standard: 0.5, hard: 4, cap: 12 },
-    9: { easy: 3, standard: 0.5, hard: 4.5, cap: 13 },
-    10: { easy: 3.5, standard: 0.5, hard: 5, cap: 15 },
-    11: { easy: 4, standard: 0.75, hard: 5.5, cap: 16 },
-    12: { easy: 4.5, standard: 0.75, hard: 6, cap: 18 },
-    13: { easy: 5, standard: 0.75, hard: 6.5, cap: 19 },
-    14: { easy: 5.5, standard: 0.75, hard: 7, cap: 21 },
-    15: { easy: 6, standard: 0.75, hard: 7.5, cap: 22 },
-    16: { easy: 6.5, standard: 0.75, hard: 8, cap: 24 },
-    17: { easy: 7, standard: 0.75, hard: 8.5, cap: 25 },
-    18: { easy: 7.5, standard: 0.75, hard: 9, cap: 27 },
-    19: { easy: 8, standard: 0.75, hard: 9.5, cap: 28 },
-    20: { easy: 8.5, standard: 0.75, hard: 10, cap: 30 },
+    1: { challenging: 0.25, hard: 0.25, cap: 0.5 },
+    2: { challenging: 0.25, hard: 0.5, cap: 2 },
+    3: { challenging: 0.25, hard: 0.75, cap: 3 },
+    4: { challenging: 0.25, hard: 1, cap: 4 },
+    5: { challenging: 0.5, hard: 2.5, cap: 7 },
+    6: { challenging: 0.5, hard: 3, cap: 9 },
+    7: { challenging: 0.5, hard: 3.5, cap: 10 },
+    8: { challenging: 0.5, hard: 4, cap: 12 },
+    9: { challenging: 0.5, hard: 4.5, cap: 13 },
+    10: { challenging: 0.5, hard: 5, cap: 15 },
+    11: { challenging: 0.75, hard: 5.5, cap: 16 },
+    12: { challenging: 0.75, hard: 6, cap: 18 },
+    13: { challenging: 0.75, hard: 6.5, cap: 19 },
+    14: { challenging: 0.75, hard: 7, cap: 21 },
+    15: { challenging: 0.75, hard: 7.5, cap: 22 },
+    16: { challenging: 0.75, hard: 8, cap: 24 },
+    17: { challenging: 0.75, hard: 8.5, cap: 25 },
+    18: { challenging: 0.75, hard: 9, cap: 27 },
+    19: { challenging: 0.75, hard: 9.5, cap: 28 },
+    20: { challenging: 0.75, hard: 10, cap: 30 },
   };
 
   static bossEncounterCrModifiers = [
-    { easy: "5-6", standard: "3-4", hard: "0-2" },
-    { easy: "4-5", standard: "2-3", hard: "0-1" },
+    { easy: "5-6", challenging: "3-4", hard: "0-2" },
+    { easy: "4-5", challenging: "2-3", hard: "0-1" },
   ];
 
   static getBudget() {
@@ -871,9 +874,9 @@ class TOV extends EncounterStrategy {
     let crBudget = this.encounterCrPerCharacter[averageLevel];
 
     return {
-      "Easy": crBudget.standard * (totalLevels - averageLevel ),
-      "Challenging": crBudget.standard * totalLevels,
-      "Hard": crBudget.standard * ( totalLevels + averageLevel),
+      "Easy": crBudget.challenging * (totalLevels - averageLevel ),
+      "Challenging": crBudget.challenging * totalLevels,
+      "Hard": crBudget.challenging * ( totalLevels + averageLevel),
       "One Monster Cap": crBudget.cap
     };
   }
@@ -993,17 +996,17 @@ class TOV extends EncounterStrategy {
      
       crCaps.push(groupCrTable.cap);
      
-      if (difficulty == "standard") {
-        totalCrBudget += group.players * group.level * groupCrTable['standard'];
+      if (difficulty == "challenging") {
+        totalCrBudget += group.players * group.level * groupCrTable['challenging'];
         partyLevel = group.level;
 
       } else if (difficulty == "easy" ) {
 
-        totalCrBudget += ( group.players - 1 ) * group.level * groupCrTable['standard'];
+        totalCrBudget += ( group.players - 1 ) * group.level * groupCrTable['challenging'];
         partyLevel = group.level;
       } else {
 
-        totalCrBudget += (group.players + 1 ) * group.level * groupCrTable['standard'];
+        totalCrBudget += (group.players + 1 ) * group.level * groupCrTable['challenging'];
         partyLevel = group.level;
       }
 
@@ -1172,12 +1175,16 @@ class TOV extends EncounterStrategy {
 
     return (
       super.monsterFilter(monster, groupTemplate, encounter, encounterType) &&
-      (allowMinions ? true : !monster.isMinion) &&
-      (encounterType === CONST.ENCOUNTER_TYPES.boss.key ) //what should this be?
+      (allowMinions ? true : !monster.isMinion) 
+      //&&
+      //(encounterType === CONST.ENCOUNTER_TYPES.boss.key ? monster.isSolo : true)
+      //(encounterType === CONST.ENCOUNTER_TYPES.boss.key ) //what should this be?
     );
   }
 
   static pickRandomMonster(monsterList, groupTemplate, encounterType) {
+    
+
     if (
       encounterType === CONST.ENCOUNTER_TYPES.boss_minions.key &&
       !groupTemplate?.leader
@@ -1199,7 +1206,7 @@ class TOV extends EncounterStrategy {
     }
   }
 
-  static getBestMonster(  
+static getBestMonster(
     targetCr,
     encounter,
     groupTemplate,

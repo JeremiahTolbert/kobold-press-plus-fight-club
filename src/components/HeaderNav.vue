@@ -24,12 +24,12 @@ const menu = ref(false);
           <div class="flex-shrink-0 flex items-center">
             <RouterLink :to="{ name: 'home' }" class="flex items-center">
               <img
-                class="h-8 w-auto"
-                src="/images/header_logo.png"
-                alt="Kobold Plus Fight Club"
+                class="h-10 w-auto"
+                src="/images/kobold-press-logo-2024.png"
+                alt="Kobold Press"
               />
               <span class="hidden md:inline pl-2 text-lg font-bold text-white"
-                >Kobold+ Fight Club</span
+                >Encounter Builder</span
               >
             </RouterLink>
           </div>

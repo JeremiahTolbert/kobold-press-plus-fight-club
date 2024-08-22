@@ -3,7 +3,7 @@ import { RouterLink } from "vue-router";
 </script>
 
 <template>
-  <div class="relative bg-gray-100 bg-gray-800">
+  <!--<div class="relative bg-gray-100 bg-gray-800">
     <div class="absolute inset-0">
       <img class="w-full h-full object-cover" src="/images/castle.jpg" alt="" />
       <div
@@ -23,13 +23,15 @@ import { RouterLink } from "vue-router";
         Fantasy Computerworks at your service. We like to build stuff.
       </p>
     </div>
-  </div>
+  </div>-->
 
   <div class="max-w-7xl mx-auto pt-12">
     <!-- This example requires Tailwind CSS v2.0+ -->
     <div class="grid lg:grid-cols-8 gap-6 px-6">
       <div class="prose dark:prose-invert lg:col-span-5">
-        <h2>Fantasy Computerworks, Ltd.</h2>
+        <h2>About This Tool</h2>
+        <p> This tool is a fork of the Kobold Fight Club application built and released under MIT license by Fantasy Computerworks.</p>
+        <p> The development work for Kobold Press was performed by <a href="https://www.clockpunkstudios.com/">Clockpunk Studios</a>.</p>
 
         <h3>Who is Fantasy Computerworks?</h3>
         <p>
@@ -45,42 +47,21 @@ import { RouterLink } from "vue-router";
           maintainer and to fix the problems caused by using Google Sheets!
         </p>
 
-        <h3>Do you have a privacy policy?</h3>
-        <p>
-          We sure do! You can read it
-          <RouterLink class="primary-link" :to="{ name: 'privacy' }"
-          >here</RouterLink
-          >.
-          <br />
-          The short answer is: We don't use cookies or
-          <del>disgusting parasites</del> third party analytics tools to track
-          you. At all. The only analytics we do is using our own hosting access
-          logs, to count page views and referrers (where people visit K+FC
-          from).
-        </p>
 
         <h3>Questions, comments, suggestions?</h3>
         <a
-          href="https://github.com/fantasycalendar/kobold-plus-fight-club"
+          href="https://support.koboldpress.com/"
           class="primary-link"
           target="_blank"
-        >Check the README on Github!</a
+        >Open a support ticket with Kobold Press!</a
         >
 
-        <h3>Via Discord</h3>
-        <a
-          href="https://app.fantasy-calendar.com/discord"
-          target="_blank"
-          class="primary-link"
-        >Fantasy Computerworks Official Discord</a
-        >
+        
       </div>
 
       <div class="lg:col-span-3 prose dark:prose-invert">
-        <div>
-          <img src="/images/logo-full.png" class="img-responsive" alt="Logo" />
-        </div>
-        <strong>Other useful tools we've created:</strong>
+        
+        <strong>Other useful tools Fantasy Computerworks have created:</strong>
         <ul style="padding-left: 24px">
           <li>
             <a

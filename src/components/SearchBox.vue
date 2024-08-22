@@ -63,7 +63,7 @@ onMounted(() => {
             id="search"
             ref="searchBox"
             v-model="filters.search"
-            class="border-gray-300 focus:ring-emerald-500 focus:border-emerald-500 block w-full rounded-md lg:rounded-r-none pl-10 sm:text-sm disabled:text-gray-500 disabled:bg-gray-300 dark:bg-gray-700 dark:border-gray-600 dark:text-gray-400 text-gray-600"
+            class="border-gray-300 focus:ring-kbp-500 focus:border-kbp-500 block w-full rounded-md lg:rounded-r-none pl-10 sm:text-sm disabled:text-gray-500 disabled:bg-gray-300 dark:bg-gray-700 dark:border-gray-600 dark:text-gray-400 text-gray-600"
             :placeholder="filters.searchPlaceholder"
           />
 
@@ -84,7 +84,7 @@ onMounted(() => {
               id="monstersPerPage"
               v-model="filters.perPage"
               name="location"
-              class="block w-full pl-3 pr-10 py-2 text-base focus:outline-none focus:ring-emerald-500 focus:border-emerald-500 sm:text-sm rounded-l-md lg:rounded-none 2xl:rounded-r-md border-gray-300 border-l-0 sm:text-sm disabled:text-gray-500 disabled:bg-gray-300 dark:bg-gray-700 dark:border-gray-600 dark:text-gray-400 text-gray-600"
+              class="block w-full pl-3 pr-10 py-2 text-base focus:outline-none focus:ring-kbp-500 focus:border-kbp-500 sm:text-sm rounded-l-md lg:rounded-none 2xl:rounded-r-md border-gray-300 border-l-0 sm:text-sm disabled:text-gray-500 disabled:bg-gray-300 dark:bg-gray-700 dark:border-gray-600 dark:text-gray-400 text-gray-600"
             >
               <option
                 v-for="option in [10, 25, 50, 100]"
@@ -104,7 +104,7 @@ onMounted(() => {
             <button
               @click="$emit('toggle-filters')"
               type="button"
-              class="-ml-px h-full relative inline-flex items-center space-x-2 px-4 py-2 border border-gray-300 text-sm font-medium rounded-r-md bg-white disabled:text-gray-500 disabled:bg-gray-300 dark:bg-gray-700 dark:hover:bg-gray-600 dark:border-gray-600 dark:text-gray-400 text-gray-600 hover:bg-gray-100 focus:outline-none focus:ring-1 focus:ring-emerald-500 focus:border-emerald-500"
+              class="-ml-px h-full relative inline-flex items-center space-x-2 px-4 py-2 border border-gray-300 text-sm font-medium rounded-r-md bg-white disabled:text-gray-500 disabled:bg-gray-300 dark:bg-gray-700 dark:hover:bg-gray-600 dark:border-gray-600 dark:text-gray-400 text-gray-600 hover:bg-gray-100 focus:outline-none focus:ring-1 focus:ring-kbp-500 focus:border-kbp-500"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"

@@ -55,17 +55,17 @@ input[type=text] {
     @apply shadow-none hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-600 dark:hover:bg-gray-700 after:content-none before:content-none rounded-md p-0;
 }
 .primary-link {
-    @apply text-kbp-700 dark:text-kbp-500 dark:hover:text-kbp-600 hover:text-kbp-600;
+    @apply text-kbp-500 dark:text-white dark:hover:text-kbp-400 hover:text-kbp-800;
 }
 
 .button-primary-md {
-    @apply inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-kbp-600 dark:bg-kbp-800 dark:hover:bg-kbp-700 disabled:opacity-75 dark:disabled:bg-kbp-900 disabled:hover:bg-kbp-600 dark:disabled:hover:bg-kbp-900 disabled:opacity-70 hover:bg-kbp-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-kbp-500;
+    @apply inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-kbp-600 dark:bg-kbp-800 dark:hover:bg-kbp-800 disabled:opacity-75 dark:disabled:bg-kbp-900 disabled:hover:bg-kbp-600 dark:disabled:hover:bg-kbp-900 disabled:opacity-70 hover:bg-kbp-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-kbp-500;
 }
 .button-primary-sm {
     @apply inline-flex items-center px-1.5 py-0.5 border border-transparent text-xs font-medium rounded-md shadow-sm text-white bg-kbp-600 dark:bg-kbp-800 dark:hover:bg-kbp-700 disabled:opacity-75 dark:disabled:bg-kbp-900 disabled:hover:bg-kbp-600 dark:disabled:hover:bg-kbp-900 disabled:opacity-70 hover:bg-kbp-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-kbp-500;
 }
 .button-primary-outline-md {
-    @apply inline-flex items-center px-4 py-2 border border-kbp-500 dark:border-kbp-800 text-sm font-medium rounded-md text-kbp-600 bg-transparent dark:bg-transparent dark:text-kbp-600 dark:hover:bg-kbp-800 dark:hover:text-white hover:bg-kbp-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-kbp-500;
+    @apply inline-flex items-center px-4 py-2 border border-kbp-500 dark:border-kbp-800 text-sm font-medium rounded-md text-kbp-600 bg-transparent dark:bg-transparent dark:text-kbp-600 dark:hover:bg-kbp-800 dark:hover:text-white hover:bg-kbp-50 hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-kbp-500;
 }
 .button-secondary-md {
     @apply inline-flex items-center px-4 py-2 border border-transparent dark:border-kbp-800 text-sm font-medium rounded-md text-kbp-700 bg-kbp-100 dark:bg-transparent dark:text-kbp-600 dark:hover:bg-kbp-800 dark:hover:text-white hover:bg-kbp-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-kbp-500;

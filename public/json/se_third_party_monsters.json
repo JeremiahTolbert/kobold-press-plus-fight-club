@@ -8687,7 +8687,7 @@
     "sources": "Tome of Beasts: 422"
   },
   {
-    "name": "Emerald Eye",
+    "name": "kbp Eye",
     "cr": 1,
     "size": "Tiny",
     "type": "Construct",
@@ -8704,7 +8704,7 @@
     "sources": "Tome of Beasts: 175"
   },
   {
-    "name": "Emerald Order Cult Leader",
+    "name": "kbp Order Cult Leader",
     "cr": 8,
     "size": "Medium",
     "type": "Humanoid",
@@ -31637,7 +31637,7 @@
     "sources": "Tome of Beasts (2023): 162"
   },
   {
-    "name": "Emerald Eye",
+    "name": "kbp Eye",
     "cr": "1",
     "size": "Tiny",
     "type": "Construct",
@@ -35887,7 +35887,7 @@
     "sources": "Tome of Beasts (2023): 410"
   },
   {
-    "name": "Emerald Order Cult Leader",
+    "name": "kbp Order Cult Leader",
     "cr": "8",
     "size": "Medium",
     "type": "Humanoid",

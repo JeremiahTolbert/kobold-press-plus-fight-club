@@ -38,7 +38,7 @@ export const useEncounter = defineStore("encounter", {
         []
       ),
       availableStrategies: strategies,
-      strategy: useLocalStorage("strategy", "k+fc"),
+      strategy: useLocalStorage("strategy", "tov"),
     };
   },
   actions: {

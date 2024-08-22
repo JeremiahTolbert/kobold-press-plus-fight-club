@@ -258,7 +258,7 @@ export default class Importer {
         'json-raw': `
                             <label class="mb-1" for="import_resource_locator">Input raw JSON or <a href="javascript:true" class="primary-link" @click="$emit('downloadExample')">download an example file to edit.</a></label>
                             <div class="mt-1">
-                                <textarea id="import_resource_locator" v-model="importerResourceLocator" rows="4" name="comment" class="border-gray-300 focus:ring-emerald-500 focus:border-emerald-500 block w-full rounded-md lg:rounded-r-none sm:text-sm disabled:text-gray-500 disabled:bg-gray-300 dark:bg-gray-700 dark:border-gray-600 dark:text-gray-400 text-gray-600"></textarea>
+                                <textarea id="import_resource_locator" v-model="importerResourceLocator" rows="4" name="comment" class="border-gray-300 focus:ring-kbp-500 focus:border-kbp-500 block w-full rounded-md lg:rounded-r-none sm:text-sm disabled:text-gray-500 disabled:bg-gray-300 dark:bg-gray-700 dark:border-gray-600 dark:text-gray-400 text-gray-600"></textarea>
                             </div>
                         `,
         'json-file': `

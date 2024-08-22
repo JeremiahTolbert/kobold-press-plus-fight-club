@@ -3,7 +3,7 @@
     <button
       @click="openDropdown"
       type="button"
-      class="bg-white dark:bg-gray-700 relative w-full border border-gray-300 dark:border-gray-600 rounded-md shadow-sm pl-3 pr-10 py-2 text-left cursor-default focus:outline-none focus:ring-1 focus:ring-emerald-500 focus:border-emerald-500 sm:text-sm"
+      class="bg-white dark:bg-gray-700 relative w-full border border-gray-300 dark:border-gray-600 rounded-md shadow-sm pl-3 pr-10 py-2 text-left cursor-default focus:outline-none focus:ring-1 focus:ring-kbp-500 focus:border-kbp-500 sm:text-sm"
       aria-haspopup="listbox"
       aria-expanded="true"
       aria-labelledby="listbox-label"
@@ -51,10 +51,10 @@
           :key="option.key"
           @click="setValue(option)"
           :class="{
-            'text-white bg-emerald-600': modelValue === option.key,
+            'text-white bg-kbp-600': modelValue === option.key,
             'text-gray-900 dark:text-gray-300': modelValue !== option.key,
           }"
-          class="group hover:text-white hover:bg-emerald-600 cursor-default select-none relative py-2 pl-3 pr-9"
+          class="group hover:text-white hover:bg-kbp-600 cursor-default select-none relative py-2 pl-3 pr-9"
           role="option"
         >
           <span
@@ -76,7 +76,7 @@
             v-show="modelValue === option.key"
             :class="{
               'text-white': modelValue === option.key,
-              'text-emerald-600': modelValue !== option.key,
+              'text-kbp-600': modelValue !== option.key,
             }"
             class="absolute inset-y-0 right-0 flex items-center pr-4"
           >

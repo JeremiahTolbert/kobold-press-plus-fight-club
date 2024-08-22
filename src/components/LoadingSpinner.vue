@@ -71,7 +71,7 @@ export default {
   opacity: 1;
   border-radius: 50%;
   animation: lds-ripple 1s cubic-bezier(0, 0.2, 0.8, 1) infinite;
-  @apply border-gray-600 dark:border-emerald-600;
+  @apply border-gray-600 dark:border-kbp-600;
 }
 .lds-ripple div:nth-child(2) {
   animation-delay: -0.5s;

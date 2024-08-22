@@ -138,7 +138,7 @@
       <div
         @click="filters.alignment.bits = filters.alignment.bits === 1023 ? 0 : 1023"
         :class="{
-          'bg-emerald-700 text-white hover:bg-emerald-600 dark:bg-emerald-800 dark:hover:bg-emerald-900':
+          'bg-kbp-700 text-white hover:bg-kbp-600 dark:bg-kbp-800 dark:hover:bg-kbp-900':
             (filters.alignment.bits & 1023) === 1023,
           'text-gray-900 bg-gray-100 dark:bg-gray-800 dark:hover:bg-gray-700 border':
             (filters.alignment.bits & 1023) !== 1023,
@@ -150,7 +150,7 @@
       <div
         @click="filters.alignment.bits = filters.alignment.bits ^ 512"
         :class="{
-          'bg-emerald-700 text-white hover:bg-emerald-600 dark:bg-emerald-800 dark:hover:bg-emerald-900':
+          'bg-kbp-700 text-white hover:bg-kbp-600 dark:bg-kbp-800 dark:hover:bg-kbp-900':
             (filters.alignment.bits & 512) === 512,
           'text-gray-900 bg-gray-100 dark:bg-gray-800 dark:hover:bg-gray-700 border':
             (filters.alignment.bits & 512) !== 512,
@@ -221,7 +221,7 @@ function toggle(value) {
 
 function classes(value) {
   return {
-    "bg-emerald-700 hover:bg-emerald-600 dark:bg-emerald-800 dark:hover:bg-emerald-900 text-white":
+    "bg-kbp-700 hover:bg-kbp-600 dark:bg-kbp-800 dark:hover:bg-kbp-900 text-white":
       filters.alignment.bits & value,
     "bg-gray-100 dark:bg-gray-800 dark:hover:bg-gray-700 border text-gray-700 dark:text-white":
       !(filters.alignment.bits & value),

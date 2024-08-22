@@ -6,7 +6,7 @@
           class="fa"
           :class="{
             'fa-check-circle': !notification.icon,
-            'text-emerald-400': !notification.icon_color,
+            'text-kbp-400': !notification.icon_color,
             [notification.icon]: notification.icon,
             [notification.icon_color]: notification.icon_color,
           }"
@@ -26,7 +26,7 @@
       </div>
       <div class="ml-4 flex-shrink-0 flex">
         <button
-          class="bg-white dark:bg-gray-500 dark:text-gray-800 rounded-md inline-flex text-gray-400 dark:text-gray-800 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-emerald-500"
+          class="bg-white dark:bg-gray-500 dark:text-gray-800 rounded-md inline-flex text-gray-400 dark:text-gray-800 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-kbp-500"
           @click="$emit('dismiss', notification.id)"
         >
           <span class="sr-only">Close</span>
@@ -61,7 +61,7 @@
     >
       <div
         :class="{
-          'bg-emerald-500': !notification.icon_color,
+          'bg-kbp-500': !notification.icon_color,
           [notification.icon_color]: notification.icon_color,
         }"
         class="absolute inset-x-0 left-0 h-full"

@@ -254,7 +254,7 @@ onBeforeMount(() => {
         <span
           v-for="page of pagination"
           :class="{
-            'cursor-pointer select-none border-emerald-600 text-emerald-600 border-t-2 pt-4 px-4 inline-flex items-center text-sm font-medium':
+            'cursor-pointer select-none border-kbp-600 text-kbp-600 border-t-2 pt-4 px-4 inline-flex items-center text-sm font-medium':
               page.active && !page.divider,
             'cursor-pointer select-none border-transparent text-gray-500 hover:text-gray-400 hover:border-gray-400 dark:hover:border-gray-500 border-t-2 pt-4 px-4 inline-flex items-center text-sm font-medium hidden lg:inline-block first-of-type:inline-block last-of-type:inline-block':
               !page.active && !page.divider,

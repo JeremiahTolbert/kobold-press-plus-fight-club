@@ -14,9 +14,9 @@ const encounter = useEncounter();
         v-for="[key, strategy] in Object.entries(encounter.availableStrategies)"
         :key="key"
         @click="encounter.setStrategy(key)"
-        class="bg-white dark:bg-gray-700 shadow rounded-lg hover:bg-gray-50 dark:hover:bg-gray-600 cursor-pointer border-2 hover:border-emerald-500 transition duration-150 ease-in-out"
+        class="bg-white dark:bg-gray-700 shadow rounded-lg hover:bg-gray-50 dark:hover:bg-gray-600 cursor-pointer border-2 hover:border-kbp-500 transition duration-150 ease-in-out"
         :class="{
-          'border-emerald-500': encounter.strategy === key,
+          'border-kbp-500': encounter.strategy === key,
           'border-transparent': encounter.strategy !== key,
         }"
       >
@@ -26,7 +26,7 @@ const encounter = useEncounter();
               class="text-base font-semibold leading-6 text-gray-900 dark:text-gray-200"
             >
               {{ strategy.label }}
-              <a class="underline text-emerald-600 hover:text-emerald-800 dark:hover:text-emerald-400" v-if="strategy.url" :href="strategy.url" @click.stop target="_blank">
+              <a class="underline text-kbp-600 hover:text-kbp-800 dark:hover:text-kbp-400" v-if="strategy.url" :href="strategy.url" @click.stop target="_blank">
                 <i class="fas fa-link"></i>
               </a>
             </h3>

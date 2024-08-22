@@ -21,7 +21,7 @@ defineProps({
         type="text"
         :id="'name_' + playerIndex"
         v-model="player.name"
-        class="px-1 py-1 !mb-0 block w-full sm:text-sm rounded-md dark:text-gray-200 dark:bg-gray-700 dark:border-gray-600 focus:ring-emerald-500 focus:border-emerald-500 border-gray-300"
+        class="px-1 py-1 !mb-0 block w-full sm:text-sm rounded-md dark:text-gray-200 dark:bg-gray-700 dark:border-gray-600 focus:ring-kbp-500 focus:border-kbp-500 border-gray-300"
       />
     </div>
     <div class="order-2">
@@ -31,7 +31,7 @@ defineProps({
         max="20"
         :id="'level_' + playerIndex"
         v-model="player.level"
-        class="px-1 py-1 block w-full sm:text-sm rounded-md dark:bg-gray-700 dark:border-gray-600 focus:ring-emerald-500 focus:border-emerald-500 border-gray-300"
+        class="px-1 py-1 block w-full sm:text-sm rounded-md dark:bg-gray-700 dark:border-gray-600 focus:ring-kbp-500 focus:border-kbp-500 border-gray-300"
       />
     </div>
 
@@ -40,11 +40,11 @@ defineProps({
         type="number"
         :id="'initiativeMod_' + playerIndex"
         v-model="player.initiativeMod"
-        class="pl-1 pr-8 py-1 block w-full sm:text-sm rounded-md dark:bg-gray-700 dark:border-gray-600 focus:ring-emerald-500 focus:border-emerald-500 border-gray-300"
+        class="pl-1 pr-8 py-1 block w-full sm:text-sm rounded-md dark:bg-gray-700 dark:border-gray-600 focus:ring-kbp-500 focus:border-kbp-500 border-gray-300"
       />
       <div
         :class="{
-          'text-emerald-600 hover:text-emerald-700 dark:text-emerald-600 dark:hover:text-emerald-700':
+          'text-kbp-600 hover:text-kbp-700 dark:text-kbp-600 dark:hover:text-kbp-700':
             player.initiativeAdvantage,
           'text-gray-400 hover:text-gray-500 dark:text-gray-300 dark:hover:text-gray-400':
             !player.initiativeAdvantage,
@@ -82,11 +82,11 @@ defineProps({
           @blur="parties.playerChange(player)"
           type="number"
           v-model="player.currentHp"
-          class="px-1 py-1 text-right border-r-0 relative block w-full rounded-none rounded-l-md sm:text-sm dark:bg-gray-700 dark:border-gray-600 focus:ring-emerald-500 focus:border-emerald-500 border-gray-300"
+          class="px-1 py-1 text-right border-r-0 relative block w-full rounded-none rounded-l-md sm:text-sm dark:bg-gray-700 dark:border-gray-600 focus:ring-kbp-500 focus:border-kbp-500 border-gray-300"
         />
       </div>
       <div
-        class="grid place-items-center px-1 shrink rounded-none border border-y-1 bg-white dark:bg-gray-700 dark:border-gray-600 focus:ring-emerald-500 focus:border-emerald-500 border-gray-300"
+        class="grid place-items-center px-1 shrink rounded-none border border-y-1 bg-white dark:bg-gray-700 dark:border-gray-600 focus:ring-kbp-500 focus:border-kbp-500 border-gray-300"
       >
         /
       </div>
@@ -95,7 +95,7 @@ defineProps({
           min="1"
           type="number"
           v-model="player.maxHp"
-          class="px-1 py-1 relative border-l-0 block w-full rounded-none rounded-r-md sm:text-sm dark:bg-gray-700 dark:border-gray-600 focus:ring-emerald-500 focus:border-emerald-500 border-gray-300"
+          class="px-1 py-1 relative border-l-0 block w-full rounded-none rounded-r-md sm:text-sm dark:bg-gray-700 dark:border-gray-600 focus:ring-kbp-500 focus:border-kbp-500 border-gray-300"
         />
       </div>
     </div>

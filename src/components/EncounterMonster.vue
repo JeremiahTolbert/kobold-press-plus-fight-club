@@ -63,7 +63,7 @@
           id="monster-number"
           type="number"
           min="1"
-          class="flex-1 min-w-0 block w-12 px-1 py-1.5 rounded-none dark:bg-gray-700 dark:border-gray-600 focus:ring-emerald-500 focus:border-emerald-500 sm:text-sm border-gray-300"
+          class="flex-1 min-w-0 block w-12 px-1 py-1.5 rounded-none dark:bg-gray-700 dark:border-gray-600 focus:ring-kbp-500 focus:border-kbp-500 sm:text-sm border-gray-300"
           :value="group.count"
           @input="$emit('count', Math.max(0, $event.target.value))"
         />
