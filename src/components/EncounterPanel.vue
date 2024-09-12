@@ -13,7 +13,6 @@ import { useModals } from "../stores/modals";
 const encounter = useEncounter();
 const party = useParty();
 const modals = useModals();
-console.log(encounter.encounterStrategy.difficulties);
 </script>
 
 <template>
